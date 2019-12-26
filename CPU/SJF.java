@@ -3,19 +3,27 @@ public class SJF
 	// Method that calculates the waiting time for all processes 
 	static int[] calcWaitingTime(int burstTime[], int quantum) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] waitingTime = new int[burstTime.length];
+        	for(int i=0;i<burstTime.length;i++){
+            	int wt = 0;
+            	for(int j=0;j<burstTime.length;j++){
+                	if((i!=j)&&(burstTime[i]>=burstTime[j])){
+                    	wt = wt + burstTime[j];
+                	}
+            	}
+            	waitingTime[i] = wt;
+        }
+        return waitingTime;
 	} 
 	
 	// Method that calculates turn around time for all processes
 	static int[] calcTurnAroundTime(int burstTime[], int waitingTime[]) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] turnAroundTime = new int[burstTime.length];
+        	for(int i = 0; i < turnAroundTime.length; i++){
+            	turnAroundTime[i] = burstTime[i] + waitingTime[i];
+        	}
+        	return turnAroundTime;
 	} 
 	
 	// Method that prints the results and calculates the average waiting and

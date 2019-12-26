@@ -3,19 +3,22 @@ public class FCFS
 	// Method that calculates the waiting time for all processes 
 	static int[] calcWaitingTime(int burstTime[], int quantum) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] waitingTime = new int[burstTime.length];
+        	waitingTime[0] = 0;
+        	for(int i = 1; i < waitingTime.length; i++){
+            		waitingTime[i] = burstTime[i-1] + waitingTime[i-1];
+        	}
+        	return waitingTime;
 	} 
 	
 	// Method that calculates turn around time for all processes
 	static int[] calcTurnAroundTime(int burstTime[], int waitingTime[]) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] turnAroundTime = new int[burstTime.length];
+        	for(int i = 0; i < turnAroundTime.length; i++){
+            		turnAroundTime[i] = burstTime[i] + waitingTime[i];
+        	}
+        	return turnAroundTime;
 	} 
 	
 	// Method that prints the results and calculates the average waiting and

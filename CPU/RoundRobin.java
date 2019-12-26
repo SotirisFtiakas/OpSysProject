@@ -3,19 +3,38 @@ public class RoundRobin
 	// Method that calculates the waiting time for all processes 
 	static int[] calcWaitingTime(int burstTime[], int quantum) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] waitingTime = new int[burstTime.length];
+        	for(int i=0;i<burstTime.length;i++){
+            	int j=0;
+            	int temp = 0;
+            	int[] clone = burstTime.clone();
+            	do {
+                	if (clone[j] != 0) {
+                    	if (clone[j] > quantum) {
+                        	clone[j] = clone[j] - quantum;
+                        	temp = temp + quantum;
+                    	} else {
+                        	temp = temp + clone[j];
+                        	clone[j] = 0;
+                    	}
+                	}
+                	j++;
+                	if(j==4)
+                    	j=0;
+            	} while (clone[i] != 0);
+            	waitingTime[i] = temp - burstTime[i];
+        	}
+        	return waitingTime;
 	} 
 	
 	// Method that calculates turn around time for all processes
 	static int[] calcTurnAroundTime(int burstTime[], int waitingTime[]) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] turnAroundTime = new int[burstTime.length];
+        	for(int i = 0; i < turnAroundTime.length; i++){
+            	turnAroundTime[i] = burstTime[i] + waitingTime[i];
+        	}
+        	return turnAroundTime;
 	} 
 	
 	// Method that prints the results and calculates the average waiting and
