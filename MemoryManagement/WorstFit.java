@@ -27,7 +27,7 @@ public class WorstFit
 					}
 			}
 			if(results.get(i) !=-255){		//  If an available memory block was found
-				sizeOfBlocks[results.get(i)] -= sizeOfProcesses[i];
+				sizeOfBlocks[results.get(i)] -= sizeOfProcesses[i];		//  Update its memory capacity
 			}
 		}
 

@@ -26,7 +26,7 @@ public class NextFit
 					}
 			}
 			if(results.get(i) !=-255){		//  If an available memory block was found
-				sizeOfBlocks[results.get(i)] -= sizeOfProcesses[i];
+				sizeOfBlocks[results.get(i)] -= sizeOfProcesses[i];		//  Update its memory capacity
 				j=results.get(i);			//  Continue next iteration from this block ID
 			}else{
 				j=0;
