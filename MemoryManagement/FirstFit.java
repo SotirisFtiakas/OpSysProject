@@ -12,25 +12,20 @@ public class FirstFit
 	{
 		ArrayList<Integer> results = new ArrayList<>();
 		boolean found;
-		int[] full = new int[sizeOfBlocks.length];		//Array for already used memory blocks
-		for(int i=0;i<sizeOfBlocks.length;i++){
-			full[i]=0;
-		}
+
 
 		for(int i=0; i<sizeOfProcesses.length; i++){
 			results.add(i,-255);
 			found=false;
 			for(int j=0; j<sizeOfBlocks.length && !found; j++){
-				if(full[j]!=1) {						//Check if block is available
 					int diff = sizeOfProcesses[i] - sizeOfBlocks[j];	//  If block has more space than the process
 					if (diff <= 0) {									//  requires, proceed
 							results.set(i, j);
 							found=true;									//  Stop iterations for this process
 					}
-				}
 			}
 			if(results.get(i) !=-255){		//  If an available memory block was found
-				full[results.get(i)]=1;		//  set block unavailable for next iterations.
+				sizeOfBlocks[results.get(i)] -= sizeOfProcesses[i];
 			}
 		}
 
