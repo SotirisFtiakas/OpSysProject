@@ -4,8 +4,10 @@ public class FCFS
 	static int[] calcWaitingTime(int burstTime[], int quantum) 
 	{
 		int[] waitingTime = new int[burstTime.length];
-        	waitingTime[0] = 0;
+        	waitingTime[0] = 0; // the waiting time of the first process is 0 by default.
         	for(int i = 1; i < waitingTime.length; i++){
+        			// waiting time for each other process is calculated by adding
+					// the waiting time and burst time of the previous process.
             		waitingTime[i] = burstTime[i-1] + waitingTime[i-1];
         	}
         	return waitingTime;
@@ -16,6 +18,7 @@ public class FCFS
 	{
 		int[] turnAroundTime = new int[burstTime.length];
         	for(int i = 0; i < turnAroundTime.length; i++){
+				    // for each process we add waiting time (already calculated) and burst time.
             		turnAroundTime[i] = burstTime[i] + waitingTime[i];
         	}
         	return turnAroundTime;
