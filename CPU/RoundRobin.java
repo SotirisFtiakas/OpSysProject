@@ -3,19 +3,39 @@ public class RoundRobin
 	// Method that calculates the waiting time for all processes 
 	static int[] calcWaitingTime(int burstTime[], int quantum) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] waitingTime = new int[burstTime.length];
+        	for(int i=0;i<burstTime.length;i++){ // in each loop we calculate the waiting time for only one process.
+            	int j=0;
+            	int temp = 0; // variable to temporary hold the waiting time + burst time of the current process (i).
+            	int[] clone = burstTime.clone();
+            	do { // Do
+                	if (clone[j] != 0) { // we take the processes one by one and we check whether the process (j) has been terminated or not.
+                    	if (clone[j] > quantum) { // we check if the remaining burst time is bigger than quantum.
+                        	clone[j] = clone[j] - quantum; // subtract the quantum from the burst time of the process (j).
+                        	temp = temp + quantum; // add the quantum in the temp.
+                    	} else {
+                        	temp = temp + clone[j]; // add the remaining burst time in the temp.
+                        	clone[j] = 0; // zero the burst time of the process (j).
+                    	}
+                	}
+                	j++; // we move to the next process.
+                	if(j==4) // loop through the processes.
+                    	j=0;
+            	} while (clone[i] != 0); // while process (i) is not finished we move as follows:
+            	waitingTime[i] = temp - burstTime[i]; // subtract the burst time of this process from temp
+        	}
+        	return waitingTime;
 	} 
 	
 	// Method that calculates turn around time for all processes
 	static int[] calcTurnAroundTime(int burstTime[], int waitingTime[]) 
 	{
-		/*
-		 * Put your code here!
-		 */
-
+		int[] turnAroundTime = new int[burstTime.length];
+        	for(int i = 0; i < turnAroundTime.length; i++){
+				// for each process we add waiting time (already calculated) and burst time.
+            	turnAroundTime[i] = burstTime[i] + waitingTime[i];
+        	}
+        	return turnAroundTime;
 	} 
 	
 	// Method that prints the results and calculates the average waiting and
